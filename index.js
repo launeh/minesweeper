@@ -22,7 +22,7 @@ class Tile {
   toString() {
     if (this.exposed) {
       if (this.hasMine) {
-        return '* ';
+        return '💥 ';
       } else if (this.count > 0) {
         return String(this.count) + ' ';
       }
