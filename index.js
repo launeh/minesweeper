@@ -38,7 +38,7 @@ class Tile {
   }
 }
 
-class Board {
+class Minesweeper {
   constructor(length = 9, width = 10, difficulty = 10) {
     this.length = length;
     this.width = width;
@@ -72,14 +72,14 @@ class Board {
           }
         };
 
-        mark(i-1,j-1);
-        mark(i-1,j);
-        mark(i-1,j+1);
-        mark(i,j-1);
-        mark(i,j+1);
-        mark(i+1,j-1);
-        mark(i+1,j);
-        mark(i+1,j+1);
+        mark(i - 1, j - 1);
+        mark(i - 1, j);
+        mark(i - 1, j + 1);
+        mark(i, j - 1);
+        mark(i, j + 1);
+        mark(i + 1, j - 1);
+        mark(i + 1,j);
+        mark(i + 1,j + 1);
       }
     }
   }
@@ -235,4 +235,4 @@ class Board {
   }
 }
 
-new Board().play();
+new Minesweeper().play();
