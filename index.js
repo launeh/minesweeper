@@ -29,7 +29,7 @@ class Tile {
       return '  ';
     } else {
       if (this.flagged) {
-        return 'F ';
+        return '⚑ ';
       } else {
         return '- ';
       }
@@ -39,7 +39,7 @@ class Tile {
 }
 
 class Board {
-  constructor(length = 9, width = 10, difficulty = 15) {
+  constructor(length = 9, width = 10, difficulty = 10) {
     this.length = length;
     this.width = width;
     this.board = [];
