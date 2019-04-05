@@ -1,7 +1,7 @@
-var clear = require('clear');
+let clear = require('clear');
 
-var readline = require('readline');
-var rl = readline.createInterface({
+let readline = require('readline');
+let rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
   terminal: false
@@ -39,7 +39,7 @@ class Tile {
 }
 
 class Minesweeper {
-  constructor(length = 9, width = 10, difficulty = 10) {
+  constructor(length = 10, width = 10, difficulty = 12) {
     this.length = length;
     this.width = width;
     this.board = [];
@@ -47,9 +47,9 @@ class Minesweeper {
     this.status = 'open';
 
     for (let i = 0; i < length; i++) {
-      var cols = [];
+      let cols = [];
       for (let j = 0; j < width; j++) {
-        var tile = new Tile();
+        let tile = new Tile();
         if (Math.random() <= this.difficulty / 100) {
           tile.hasMine = true;
         }
@@ -60,13 +60,13 @@ class Minesweeper {
 
     for (let i = 0; i < length; i++) {
       for (let j = 0; j < width; j++) {
-        var current = this.board[i][j];
+        let current = this.board[i][j];
 
         if (!current.hasMine) {
           continue;
         }
 
-        var mark = (i,j) => {
+        let mark = (i,j) => {
           if (this.board[i] && this.board[i][j]) {
             this.board[i][j].count++;
           }
@@ -87,13 +87,13 @@ class Minesweeper {
   show() {
     clear();
 
-    var description = `Minesweeper v1.0.0\n\nTo play use [C|F][row][col]. 'C': clear, 'F': flag. E.g. C5b\n\n`;
+    let description = `Minesweeper v1.0.0\n\nTo play use [C|F][row][col]. 'C': clear, 'F': flag. E.g. C5b\n\n`;
 
     process.stdout.write("\n");
     process.stdout.write(description);
     process.stdout.write("  ");
-    var char = 'a';
-    for (var i = 0; i < this.width; i++) {
+    let char = 'a';
+    for (let i = 0; i < this.width; i++) {
       process.stdout.write(char + ' ');
       char = String.fromCharCode(char.charCodeAt(0) + 1);
     }
@@ -101,7 +101,7 @@ class Minesweeper {
 
     for (i = 0; i < this.length; i++) {
       process.stdout.write(String(i + 1) + ' ');
-      for (var j = 0; j < this.width; j++) {
+      for (let j = 0; j < this.width; j++) {
         process.stdout.write(this.board[i][j].toString());
       }
       process.stdout.write("\n");
@@ -149,7 +149,7 @@ class Minesweeper {
       return this;
     }
 
-    var tile = this.board[i][j];
+    let tile = this.board[i][j];
     if (tile.exposed) {
       return this;
     }
@@ -180,7 +180,7 @@ class Minesweeper {
 
     for (let i = 0; i < this.length; i++) {
       for (let j = 0; j < this.width; j++) {
-        var tile = this.board[i][j];
+        let tile = this.board[i][j];
         if (!tile.exposed && !tile.hasMine) {
           this.status = 'open';
         }
@@ -201,12 +201,12 @@ class Minesweeper {
 
   play() {
     this.show();
-    var self = this;
+    let self = this;
 
     rl.setPrompt("\nMove? ");
     rl.prompt();
     return rl.on('line', function(line){
-      var [move, row, col] = line.toLowerCase().split('');
+      let [move, row, col] = line.toLowerCase().split('');
 
       if (move !== 'c' && move !== 'f') {
         self.show();
@@ -218,7 +218,7 @@ class Minesweeper {
       col = col.charCodeAt(0) - 'a'.charCodeAt(0);
       self.move(move, row, col);
 
-      var status = self.getStatus();
+      let status = self.getStatus();
 
       if (status === 'won') {
         self.exposeAll().show();
